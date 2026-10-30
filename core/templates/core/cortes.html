@@ -1,0 +1,91 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nossos Cortes | Cortes House</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'home' %}" class="logo">
+                CORTES<span>HOUSE</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Início</a></li>
+                <li><a href="{% url 'cortes' %}">Cortes</a></li>
+                <li><a href="{% url 'home' %}#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="catalogo">
+
+        <section class="catalogo-header">
+            <p class="section-subtitle">CORTES HOUSE</p>
+
+            <h1>Nossos <span>cortes</span></h1>
+
+            <p>
+                Encontre o estilo ideal para você.
+                Confira nossos serviços e preços.
+            </p>
+        </section>
+
+        <section class="cortes-grid">
+
+            {% for corte in cortes %}
+
+                <article class="corte-card">
+
+                    <h2>{{ corte.nome }}</h2>
+
+                    <p class="corte-descricao">
+                        {{ corte.descricao }}
+                    </p>
+
+                    <p class="corte-duracao">
+                        Duração: {{ corte.duracao }} minutos
+                    </p>
+
+                    <p class="corte-preco">
+                        R$ {{ corte.preco|floatformat:2 }}
+                    </p>
+
+                </article>
+
+            {% empty %}
+
+                <div class="sem-cortes">
+                    <p>
+                        Ainda não temos cortes disponíveis.
+                        Volte em breve!
+                    </p>
+                </div>
+
+            {% endfor %}
+
+        </section>
+
+        <div class="voltar-home">
+            <a href="{% url 'home' %}" class="btn-secondary">
+                Voltar ao início
+            </a>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Cortes House. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
