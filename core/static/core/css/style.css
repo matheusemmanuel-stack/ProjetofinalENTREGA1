@@ -336,3 +336,58 @@ footer {
     text-align: center;
     margin-top: 50px;
 }
+
+.contato-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 60px auto;
+}
+
+.contato-card {
+    padding: 35px;
+    background: #1c1c1c;
+    border: 1px solid #383838;
+    border-radius: 12px;
+}
+
+.contato-card h1 {
+    margin-bottom: 15px;
+    color: #d4af37;
+}
+
+.contato-card > p {
+    margin-bottom: 30px;
+    color: #cccccc;
+}
+
+.contato-item {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #383838;
+}
+
+.contato-item:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.contato-item h2 {
+    margin-bottom: 8px;
+    color: #d4af37;
+    font-size: 20px;
+}
+
+.contato-item p {
+    color: #eeeeee;
+    line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+    .contato-container {
+        margin: 30px auto;
+    }
+
+    .contato-card {
+        padding: 22px;
+    }
+}
