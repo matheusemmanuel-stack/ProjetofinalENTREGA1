@@ -12,3 +12,6 @@ def listar_cortes(request):
     return render(request, 'core/cortes.html', {
         'cortes': cortes
     })
+
+def contato(request):
+    return render(request, 'core/contato.html')
