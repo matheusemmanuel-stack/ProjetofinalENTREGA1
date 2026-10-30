@@ -1,6 +1,7 @@
 from django import forms
 from django.utils import timezone
 from .models import Agendamento
+from datetime import datetime, timedelta
 
 
 class AgendamentoForm(forms.ModelForm):
@@ -30,27 +31,28 @@ class AgendamentoForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-
         data = cleaned_data.get('data')
         horario = cleaned_data.get('horario')
+        corte = cleaned_data.get('corte')
 
-        if data and horario:
-            agora = timezone.localtime()
-            data_atual = timezone.localdate()
+        # Mantém validações anteriores de data/horário passado...
 
-            if data < data_atual:
-                self.add_error(
-                    'data',
-                    'Não é possível agendar para uma data passada.'
-                )
+        if data and horario and corte:
+            inicio_novo = datetime.combine(data, horario)
+            fim_novo = inicio_novo + timedelta(minutes=corte.duracao)
 
-            elif data == data_atual and horario <= agora.time().replace(
-                second=0,
-                microsecond=0
-            ):
-                self.add_error(
-                    'horario',
-                    'Escolha um horário futuro.'
-                )
+            agendamentos = Agendamento.objects.filter(data=data).exclude(pk=self.instance.pk)
+
+            for agendamento in agendamentos:
+                inicio_existente = datetime.combine(agendamento.data, agendamento.horario)
+                fim_existente = inicio_existente + timedelta(minutes=agendamento.corte.duracao)
+
+                # Regra de interseção de intervalos
+                if inicio_novo < fim_existente and fim_novo > inicio_existente:
+                    self.add_error(
+                        'horario',
+                        'Esse horário não está disponível. Escolha outro horário.'
+                    )
+                    break
 
         return cleaned_data
