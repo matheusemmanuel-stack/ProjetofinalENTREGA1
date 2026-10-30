@@ -253,3 +253,86 @@ footer {
         display: none;
     }
 }
+
+.catalogo {
+    min-height: 70vh;
+    padding: 70px 10%;
+}
+
+.catalogo-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.catalogo-header h1 {
+    font-size: clamp(35px, 5vw, 55px);
+    margin-bottom: 20px;
+}
+
+.catalogo-header h1 span {
+    color: #c9a45c;
+}
+
+.catalogo-header > p:last-child {
+    color: #aaa;
+    line-height: 1.8;
+}
+
+.cortes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.corte-card {
+    background: #1c1c1c;
+    border: 1px solid #393022;
+    border-radius: 8px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s;
+}
+
+.corte-card:hover {
+    border-color: #c9a45c;
+    transform: translateY(-5px);
+}
+
+.corte-card h2 {
+    color: #c9a45c;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.corte-descricao {
+    color: #bbb;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.corte-duracao {
+    color: #888;
+    font-size: 14px;
+    margin-top: auto;
+    margin-bottom: 15px;
+}
+
+.corte-preco {
+    color: #fff;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.sem-cortes {
+    grid-column: 1 / -1;
+    padding: 40px 20px;
+    text-align: center;
+    border: 1px dashed #c9a45c;
+    color: #c9a45c;
+}
+
+.voltar-home {
+    text-align: center;
+    margin-top: 50px;
+}
