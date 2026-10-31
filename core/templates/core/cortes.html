@@ -1,91 +1,63 @@
-{% load static %}
+{% extends 'core/base.html' %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}Nossos Cortes | Cortes House{% endblock %}
 
-    <title>Nossos Cortes | Cortes House</title>
+{% block content %}
 
-    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
-</head>
+<main class="catalogo">
 
-<body>
+    <section class="catalogo-header">
+        <p class="section-subtitle">CORTES HOUSE</p>
 
-    <header>
-        <nav class="navbar">
-            <a href="{% url 'home' %}" class="logo">
-                CORTES<span>HOUSE</span>
-            </a>
+        <h1>Nossos <span>cortes</span></h1>
 
-            <ul class="nav-links">
-                <li><a href="{% url 'home' %}">Início</a></li>
-                <li><a href="{% url 'cortes' %}">Cortes</a></li>
-                <li><a href="{% url 'home' %}#contato">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
+        <p>
+            Encontre o estilo ideal para você.
+            Confira nossos serviços e preços.
+        </p>
+    </section>
 
-    <main class="catalogo">
+    <section class="cortes-grid">
 
-        <section class="catalogo-header">
-            <p class="section-subtitle">CORTES HOUSE</p>
+        {% for corte in cortes %}
 
-            <h1>Nossos <span>cortes</span></h1>
+            <article class="corte-card">
 
-            <p>
-                Encontre o estilo ideal para você.
-                Confira nossos serviços e preços.
-            </p>
-        </section>
+                <h2>{{ corte.nome }}</h2>
 
-        <section class="cortes-grid">
+                <p class="corte-descricao">
+                    {{ corte.descricao }}
+                </p>
 
-            {% for corte in cortes %}
+                <p class="corte-duracao">
+                    Duração: {{ corte.duracao }} minutos
+                </p>
 
-                <article class="corte-card">
+                <p class="corte-preco">
+                    R$ {{ corte.preco|floatformat:2 }}
+                </p>
 
-                    <h2>{{ corte.nome }}</h2>
+            </article>
 
-                    <p class="corte-descricao">
-                        {{ corte.descricao }}
-                    </p>
+        {% empty %}
 
-                    <p class="corte-duracao">
-                        Duração: {{ corte.duracao }} minutos
-                    </p>
+            <div class="sem-cortes">
+                <p>
+                    Ainda não temos cortes disponíveis.
+                    Volte em breve!
+                </p>
+            </div>
 
-                    <p class="corte-preco">
-                        R$ {{ corte.preco|floatformat:2 }}
-                    </p>
+        {% endfor %}
 
-                </article>
+    </section>
 
-            {% empty %}
+    <div class="voltar-home">
+        <a href="{% url 'home' %}" class="btn-secondary">
+            Voltar ao início
+        </a>
+    </div>
 
-                <div class="sem-cortes">
-                    <p>
-                        Ainda não temos cortes disponíveis.
-                        Volte em breve!
-                    </p>
-                </div>
+</main>
 
-            {% endfor %}
-
-        </section>
-
-        <div class="voltar-home">
-            <a href="{% url 'home' %}" class="btn-secondary">
-                Voltar ao início
-            </a>
-        </div>
-
-    </main>
-
-    <footer>
-        <p>© 2026 Cortes House. Todos os direitos reservados.</p>
-    </footer>
-
-</body>
-</html>
+{% endblock %}

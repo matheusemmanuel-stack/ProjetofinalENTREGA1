@@ -1,3 +1,42 @@
-{% block content %}
+{% load static %}
 
-{% endblock %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Cortes House{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <a href="{% url 'home' %}" class="logo">
+                CORTES<span>HOUSE</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Início</a></li>
+                <li><a href="{% url 'cortes' %}">Cortes</a></li>
+                <li><a href="{% url 'agendamento' %}">Agendamento</a></li>
+                <li><a href="{% url 'contato' %}">Contato</a></li>
+            </ul>
+
+            <a href="{% url 'agendamento' %}" class="btn-primary nav-button">
+                Agendar horário
+            </a>
+        </nav>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+        <p>© 2026 Cortes House. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
